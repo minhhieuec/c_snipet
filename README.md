@@ -46,3 +46,30 @@ References:
 ```
 References:
 - https://stackoverflow.com/questions/4518011/algorithm-for-powfloat-float
+
+### Concatenate preprocessor define
+```c
+#define VERSION_MAJOR 1
+#define VERSION_MINOR 0
+#define REVISION b
+#define _STRINGIFY(x) #x
+#define STRINGIFY(x) _STRINGIFY(x)
+
+/* here's the magic */
+#define _CONCAT(x,y) x##y
+#define CONCAT(x,y) _CONCAT(x,y)
+#define VERSION VERSION_MAJOR.CONCAT(VERSION_MINOR,REVISION)
+
+integer version_major = VERSION_MAJOR;
+integer version_minor = VERSION_MINOR;
+string revision = STRINGIFY(REVISION);
+string version_string = STRINGIFY(VERSION);
+```
+Output:
+```
+integer version_major = 1;
+integer version_minor = 0;
+string revision = "b";
+string version_string = "1.0b";
+```
+Reference: https://stackoverflow.com/questions/40677104/concatenate-preprocessor-defines-to-form-a-string
