@@ -73,3 +73,49 @@ string revision = "b";
 string version_string = "1.0b";
 ```
 Reference: https://stackoverflow.com/questions/40677104/concatenate-preprocessor-defines-to-form-a-string
+
+## callback function
+
+### Simple callback function
+```c
+#include<stdio.h>
+void my_function() {
+   printf("This is a normal function.");
+}
+void my_callback_function(void (*ptr)()) {
+   printf("This is callback function.\n");
+   (*ptr)();    //calling the callback function
+}
+main() {
+   void (*ptr)() = &my_function;
+   my_callback_function(ptr);
+}
+```
+Output:
+```
+This is callback function.
+This is a normal function.
+```
+
+Reference: https://www.tutorialspoint.com/callback-function-in-c
+
+### Callback function with params
+```c
+#include <stdio.h>
+
+void caller(int (*cc)(int ),int a) {
+    cc(a);
+}
+
+int blub(int a) {
+    printf("%i", a); 
+    return 1;
+}
+
+int main(int argc, char** argv)
+{
+    caller(blub, 1000);
+    return 1;
+}
+```
+Reference: https://stackoverflow.com/questions/7717608/callback-with-parameters/7717645
