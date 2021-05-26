@@ -119,3 +119,30 @@ int main(int argc, char** argv)
 }
 ```
 Reference: https://stackoverflow.com/questions/7717608/callback-with-parameters/7717645
+
+## Add function into struct
+```c
+#include <stdio.h>
+
+struct t {
+        int a;
+        void (*fun) (int * a);
+} ;
+
+void get_a (int * a) {
+        printf (" input : ");
+        scanf ("%d", a);
+}
+
+int main () {
+        struct t test;
+        test.a = 0;
+
+        printf ("a (before): %d\n", test.a);
+        test.fun = get_a;
+        test.fun(&test.a);
+        printf ("a (after ): %d\n", test.a);
+
+        return 0;
+}
+```
